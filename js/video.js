@@ -1,11 +1,52 @@
 var video;
 
 window.addEventListener("load", function() {
-	console.log("Good job opening the window")
+	console.log("Good job opening the window");
+	video=document.querySelector("#player1");
+	video.loop=false;
+	video.autoplay=false;
+	
+
+});
+document.querySelector("#play").addEventListener("click", function() {
+	console.log("Play Video");
+	document.querySelector("#volume").innerHTML= video.volume *100 + "%";
+	video.play();
+});
+
+document.querySelector("#pause").addEventListener("click", function() {
+	console.log("Pause Video");
+	video.pause();
+});
+
+document.querySelector("#slower").addEventListener("click", function() {
+	video.playbackRate*=0.9;
+	console.log(video.playbackRate);
+});
+
+document.querySelector("#faster").addEventListener("click", function() {
+	video.playbackRate/=0.9;
+	console.log(video.playbackRate);
+});
+
+document.querySelector("#skip").addEventListener("click", function() {
+	video.currentTime += 10;
+	if (video.currentTime >= video.duration)
+		video.currentTime=0;
+	console.log("Video current time is ", video.currentTime);
 
 });
 
-// document.querySelector("#play").addEventListener("click", function() {
-// 	console.log("Play Video");
-// });
+document.querySelector("#mute").addEventListener("click", function() {
 
+	if (video.muted === false) {    
+		video.muted = true;
+		document.querySelector('#mute').innerHTML = 'Mute';
+	}
+	else{
+		video.muted= false;
+		document.querySelector('#mute').innerHTML = 'Unmute';
+
+	}
+
+});
